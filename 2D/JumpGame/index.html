@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head><title>2Dジャンプゲーム</title><style>canvas{background:#87CEEB;display:block;margin:0 auto}</style></head>
+<body><canvas id="game"></canvas><script>
+const canvas = document.getElementById("game"), ctx = canvas.getContext("2d");
+canvas.width = 800; canvas.height = 400;
+let player = {x: 50, y: 300, w: 50, h: 50, vy: 0, jump: false}, gravity = 1;
+document.addEventListener("keydown", e => {if(e.key===" "&&!player.jump){player.vy=-15;player.jump=true;}});
+function draw(){ctx.clearRect(0,0,800,400);ctx.fillStyle="red";ctx.fillRect(player.x,player.y,player.w,player.h);}
+function update(){player.vy += gravity; player.y += player.vy;
+if(player.y + player.h > 350){player.y = 350 - player.h; player.jump = false;}}
+function loop(){update(); draw(); requestAnimationFrame(loop);} loop();
+</script></body></html>
